@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ofrecer Servicios</title>
+  <link rel="stylesheet" type="text/css" href="styles/common.css">
+
+</head>
+<body>
+  <header class="hero">
+    <img
+    src="circulo.jpg"
+    sizes="50vw"
+    style="display:block; width:100%; height:100%; border-radius:inherit; object-position:center; object-fit:cover; image-rendering:auto"
+    >
+    <h1 class="title">PLA.S.M.A</h1>
+    <h2 class="subtitle">PLATAFORMA DE SERVICIOS MÚLTIPLES ADAPTADOS</h2>
+  </header>
+    <main>
+      <h1>Formulario de Oferta de Servicios</h1>
+      <form id="serviceForm">
+        <label for="service">Servicio que ofrece:</label>
+        <select name="service" id="service" required>
+          <option value="">Seleccione un servicio...</option>
+          <option value="Limpieza">Limpieza</option>
+          <option value="Mudanza">Mudanza</option>
+          <option value="Fontaneria">Fontanería</option>
+          <option value="Electricidad">Electricidad</option>
+          <option value="Montaje_de_muebles">Montaje de muebles</option>
+          <option value="Reparaciones_basicas">Reparaciones básicas</option>
+          <option value="Manipedias">Manipedias</option>
+          <option value="Peluqueria">Peluquería</option>
+          <option value="Cuidado_de_personas">Cuidado de personas</option>
+          <option value="Cuidado_de_mascotas">Cuidado de mascotas</option>
+          <option value="Decoracion">Decoración</option>
+          <option value="Acabados">Acabados</option>
+        </select>
+
+        <label for="name">Primer nombre:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="surname">Primer apellido:</label>
+        <input type="text" id="surname" name="surname" required>
+
+        <label for="nif">NIF:</label>
+        <input type="text" id="nif" name="nif" required>
+
+        <label for="zip_code">Código Postal:</label>
+        <input type="text" id="zip_code" name="zip_code" required>
+
+        <label for="birthdate">Fecha de nacimiento:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="iban">IBAN de tu cuenta bancaria donde deseas recibir el pago:</label>
+        <input type="text" id="iban" name="iban" required>
+
+        <input type="submit" value="Enviar">
+      </form>
+    </main>
+    
+    <script>
+      document.getElementById('serviceForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+  
+          const formData = new FormData(this);
+          let valid = true;
+  
+          // Ejemplo de validación de email
+          const email = formData.get('email');
+          if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+              alert('Por favor, introduce un correo electrónico válido.');
+              valid = false;
+          }
+  
+          // Nombre y Apellido: Solo letras del abecedario castellano
+        const nameRegex = /^[A-Za-záéíóúÁÉÍÓÚñÑ]+$/;
+        if (!nameRegex.test(formData.get('name'))) {
+            alert('El nombre sólo puede contener letras.');
+            valid = false;
+        }
+
+        if (!nameRegex.test(formData.get('surname'))) {
+            alert('El apellido sólo pueden contener letras.');
+            valid = false;
+        }
+
+        // NIF/NIE: Último dígito debe ser una letra mayúscula, máximo 9 caracteres
+        const nifRegex = /^[0-9X-Z]{8}[A-Z]$/;
+        if (!nifRegex.test(formData.get('nif'))) {
+            alert('NIF inválido, no use guiones, máximo 9 caracteres.');
+            valid = false;
+        }
+
+        // Código Postal: Solo números, longitud de 5
+        const postalCodeRegex = /^[0-9]{5}$/;
+        if (!postalCodeRegex.test(formData.get('zip_code'))) {
+            alert('Código postal inválido. Debe contener 5 dígitos.');
+            valid = false;
+        }
+
+        // Fecha de nacimiento: formato dd/mm/aaaa, mayores de 18 años
+        /*const birthDate = new Date(formData.get('birthdate'));
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--
+        }
+        if (isNaN(age) || age < 18) {
+            alert('Debes ser mayor de 18 años.');
+            valid = false;
+        }*/
+
+        // Nombre de usuario: Letras y números, máximo 10 caracteres
+        const usernameRegex = /^[A-Za-z0-9]{1,10}$/;
+        if (!usernameRegex.test(formData.get('username'))) {
+            alert('Nombre de usuario inválido. Máximo 10 caracteres, solo letras y números.');
+            valid = false;
+        }
+
+        // IBAN: Comienza con 'ES' seguido de 22 números
+        const ibanRegex = /^ES[0-9]{22}$/;
+        if (!ibanRegex.test(formData.get('iban'))) {
+            alert('IBAN inválido. Debe comenzar con ES seguido de 22 números sin espacios ni guiones.');
+            valid = false;
+        }
+          // Agrega aquí más validaciones según sea necesario...
+  
+          if (valid) {
+              // Si todas las validaciones pasan, envía los datos al servidor
+              console.log('Valid form.')
+              fetch('http://127.0.0.1:3000/api/addService', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                  },
+                  body: JSON.stringify(Object.fromEntries(formData))
+              })
+              .then(response => {
+                console.log('Then')
+                  if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                  return response.json(); console.log('Response ok.')
+              })
+              .then(data => {
+                  alert('Servicio ofrecido con éxito.');
+              })
+              .catch(error => {
+                  console.error('Error al enviar el formulario:', error);
+              });
+          }
+      });
+  </script>
+<footer>
+  <div class="footer-column" style="text-align: center; flex: 1;">
+    <h3>Columna 1</h3>
+    <p>Contenido de la columna 1</p>
+    <p>Contenido de la columna 1</p>
+    <p>Contenido de la columna 1</p>
+  </div>
+
+  <div class="footer-column" style="text-align: center; flex: 1;">
+    <h3>Columna 2</h3>
+    <p>Contenido de la columna 2</p>
+    <p>Contenido de la columna 2</p>
+    <p>Contenido de la columna 2</p>
+  </div>
+
+  <div class="footer-column" style="text-align: center; flex: 1;">
+    <h3>Columna 3</h3>
+    <p>Contenido de la columna 3</p>
+    <p>Contenido de la columna 3</p>
+    <p>Contenido de la columna 3</p>
+  </div>
+</footer>
+
+</body>
+</html>

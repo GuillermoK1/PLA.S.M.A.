@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plasma - Home</title>
+    <link rel="stylesheet" type="text/css" href="styles/common.css">
+    <link rel="stylesheet" type="text/css" href="styles/Home.css">
+  </head>
+
+  <header class="hero">
+    <img
+    src="circulo.jpg"
+    sizes="50vw"
+    style="display:block; width:100%; height:100%; border-radius:inherit; object-position:center; object-fit:cover; image-rendering:auto"
+    >
+    <h1 class="title">PLA.S.M.A</h1>
+    <h2 class="subtitle">PLATAFORMA DE SERVICIOS MÚLTIPLES ADAPTADOS</h2>
+  </header>
+<body>
+    <main>
+        <div class="service-grid">
+            <button onclick="redirectToSearch('Limpieza')" class="service-button">Limpieza</button>
+            <button onclick="redirectToSearch('Mudanza')" class="service-button">Mudanza</button>
+            <button onclick="redirectToSearch('Fontanería')" class="service-button">Fontanería</button>
+            <button onclick="redirectToSearch('Electricidad')" class="service-button">Electricidad</button>
+            <button onclick="redirectToSearch('Montaje de muebles')" class="service-button">Montaje de muebles</button>
+            <button onclick="redirectToSearch('Reparaciones básicas')" class="service-button">Reparaciones básicas</button>
+            <button onclick="redirectToSearch('Manicure y Pedicure')" class="service-button">Manipedias</button>
+            <button onclick="redirectToSearch('Peluquería')" class="service-button">Peluquería</button>
+            <button onclick="redirectToSearch('Cuidado de personas')" class="service-button">Cuidado de personas</button>
+            <button onclick="redirectToSearch('Cuidado de mascotas')" class="service-button">Cuidado de mascotas</button>
+            <button onclick="redirectToSearch('Decoración')" class="service-button">Decoración</button>
+            <button onclick="redirectToSearch('Acabados')" class="service-button">Acabados</button>
+        </div>
+            <a href="ofrecer-servicios.html" class="offer-button">Ofrecer tus servicios</a>
+    </main>
+    <script>
+        function redirectToSearch(service) {
+            window.location.href = (`https://127.0.0.1:5500/public/find.html?service=${service}`)
+        }
+    </script>
+    <footer>
+        <div class="footer-column" style="text-align: center; flex: 1;">
+          <h3>Columna 1</h3>
+          <p>Contenido de la columna 1</p>
+          <p>Contenido de la columna 1</p>
+          <p>Contenido de la columna 1</p>
+        </div>
+      
+        <div class="footer-column" style="text-align: center; flex: 1;">
+          <h3>Columna 2</h3>
+          <p>Contenido de la columna 2</p>
+          <p>Contenido de la columna 2</p>
+          <p>Contenido de la columna 2</p>
+        </div>
+      
+        <div class="footer-column" style="text-align: center; flex: 1;">
+          <h3>Columna 3</h3>
+          <p>Contenido de la columna 3</p>
+          <p>Contenido de la columna 3</p>
+          <p>Contenido de la columna 3</p>
+        </div>
+      </footer>
+</body>
+</html>

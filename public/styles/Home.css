@@ -1,0 +1,36 @@
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.service-button {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.service-button:hover {
+    background-color: #2980b9;
+}
+
+.offer-button {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #34db6e;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.offer-button:hover {
+  background-color: #259f4f
+}
